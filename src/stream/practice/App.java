@@ -21,6 +21,7 @@ public class App {
         listEmployeesJoinedInYear2023();
         printMinSalary();
         listPeopleWorkingOn2Projects();
+        countTotalLaptops();
     }
 
     private static void listAllDistinctProjectInNonAscendingOrder() {
@@ -59,6 +60,16 @@ public class App {
         List<Employee> employees = App.employeeList.stream()
                 .filter(e -> e.getProjects().size() > 2).toList();
         employees.forEach(App::convertToString);
+    }
+
+    private static void countTotalLaptops() {
+        System.out.println("=== countTotalLaptops ======= ");
+        int total = App.employeeList.stream()
+                .mapToInt(Employee::getTotalLaptopsAssigned)
+                .sum();
+        System.out.println(total);
+
+
     }
 
     private static void convertToString(Project project) {
