@@ -3,6 +3,7 @@ package stream.practice;
 import lamba.excercises.StringEmpty;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class App {
@@ -22,6 +23,7 @@ public class App {
         printMinSalary();
         listPeopleWorkingOn2Projects();
         countTotalLaptops();
+        findCountOfEachName();
     }
 
     private static void listAllDistinctProjectInNonAscendingOrder() {
@@ -68,8 +70,15 @@ public class App {
                 .mapToInt(Employee::getTotalLaptopsAssigned)
                 .sum();
         System.out.println(total);
+    }
 
+    private static void findCountOfEachName() {
+        System.out.println("=== findCountOfEachName ======= ");
+        List<String> names = List.of("Nirav", "Nirav", "Ravi", "Ravi", "Bob");
+        Map<String, Long> result = names.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
+        System.out.println(result);
 
+        System.out.println("=== findCountOfEmployees ======= ");
     }
 
     private static void convertToString(Project project) {
