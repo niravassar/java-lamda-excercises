@@ -1,9 +1,6 @@
 package stream.practice;
 
-import lamba.excercises.StringEmpty;
-
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class App {
@@ -24,6 +21,8 @@ public class App {
         listPeopleWorkingOn2Projects();
         countTotalLaptops();
         findCountOfEachName();
+        findHowManyTypeOfProjects();
+        findUniqueSetOfNames();
     }
 
     private static void listAllDistinctProjectInNonAscendingOrder() {
@@ -77,10 +76,23 @@ public class App {
         List<String> names = List.of("Nirav", "Nirav", "Ravi", "Ravi", "Bob");
         Map<String, Long> result = names.stream().collect(Collectors.groupingBy(i -> i, Collectors.counting()));
         System.out.println(result);
-
-        System.out.println("=== findCountOfEmployees ======= ");
     }
 
+    private static void findHowManyTypeOfProjects() {
+        System.out.println("=== findHowManyTypeOfProjects ======= ");
+        List<Project> allProjects = App.employeeList.stream().map(Employee::getProjects).flatMap(List::stream).toList();
+        Map<String, Long> projectTypeCount = allProjects.stream().collect(Collectors.groupingBy(Project::getTeam, Collectors.counting()));
+        System.out.println(projectTypeCount);
+    }
+
+    private static void findUniqueSetOfNames() {
+        System.out.println("=== findUniqueSetOfNames ======= ");
+        List<String> names = List.of("Nirav", "Nirav", "Ravi", "Ravi", "Bob");
+        Set nameSet = new HashSet<>(names);
+        System.out.println(nameSet);
+        List<String> namesList = names.stream().distinct().toList();
+        System.out.println(namesList);
+    }
     private static void convertToString(Project project) {
         System.out.printf("%-12s PM: %20s Team:%s%n", project.getName(), project.getProjectManager(), project.getTeam());
     }
