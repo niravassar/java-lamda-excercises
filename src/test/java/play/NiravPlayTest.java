@@ -9,7 +9,9 @@ import java.util.List;
 public class NiravPlayTest {
 
     @Test
-    void myTest() {
+    void leetCode1637WidestVeriticalArea() {
+        //1637. Widest Vertical Area Between Two Points Containing No Points
+        //https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/description/
         int[][] sample = { {8,7},{9,9},{7,4},{9,7} };
         System.out.println(maxWidthOfVerticalArea(sample));
         int[][] sample2 = {{3,1},{9,0},{1,0},{1,4},{5,3},{8,8}};
