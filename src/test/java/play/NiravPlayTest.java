@@ -1,10 +1,11 @@
 package play;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NiravPlayTest {
 
@@ -12,8 +13,8 @@ public class NiravPlayTest {
     void leetCode1637WidestVeriticalArea() {
         //1637. Widest Vertical Area Between Two Points Containing No Points
         //https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/description/
-        int[][] sample = { {8,7},{9,9},{7,4},{9,7} };
-        System.out.println(maxWidthOfVerticalArea(sample));
+        //int[][] sample = { {8,7},{9,9},{7,4},{9,7} };
+        //System.out.println(maxWidthOfVerticalArea(sample));
         int[][] sample2 = {{3,1},{9,0},{1,0},{1,4},{5,3},{8,8}};
         System.out.println(maxWidthOfVerticalArea(sample2));
     }
@@ -40,5 +41,17 @@ public class NiravPlayTest {
             result.add(greatestValue);
         }
         return Collections.max(result);
+    }
+
+    @Test
+    void hiredSample1() {
+        assertThat(solution1(new long[] {9L, 10L, 15})).isEqualTo(15);
+        assertThat(solution1(new long[] {})).isEqualTo(0);
+    }
+
+    private long solution1(long[] numbers) {
+        Long[] longObjects = ArrayUtils.toObject(numbers);
+        List<Long> myList = new ArrayList<>(List.of(longObjects));
+        return myList.stream().max(Long::compareTo).orElse(0L);
     }
 }
