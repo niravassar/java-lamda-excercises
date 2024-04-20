@@ -47,11 +47,23 @@ public class NiravPlayTest {
     void hiredSample1() {
         assertThat(solution1(new long[] {9L, 10L, 15})).isEqualTo(15);
         assertThat(solution1(new long[] {})).isEqualTo(0);
+        assertThat(solution2(new long[] {9L, 10L, 15})).isEqualTo(15);
+        assertThat(solution2(new long[] {})).isEqualTo(0);
     }
 
     private long solution1(long[] numbers) {
         Long[] longObjects = ArrayUtils.toObject(numbers);
         List<Long> myList = new ArrayList<>(List.of(longObjects));
         return myList.stream().max(Long::compareTo).orElse(0L);
+    }
+
+    private long solution2(long[] numbers) {
+        long greatest = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > greatest) {
+                greatest = numbers[i];
+            }
+        }
+        return greatest;
     }
 }
