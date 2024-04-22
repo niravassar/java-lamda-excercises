@@ -66,4 +66,94 @@ public class NiravPlayTest {
         }
         return greatest;
     }
+
+    @Test
+    void leftOrRight() {
+        System.out.println(leftOrRight(new long[] {3L, 6L, 2,9,-1,10}));
+        System.out.println(leftOrRight(new long[] {3L, 6L, 2,9,-1,99}));
+        System.out.println(leftOrRight(new long[] {3L, 6L, 2,9,-1,13}));
+        System.out.println(leftOrRight(new long[] {}));
+        System.out.println(leftOrRight(new long[] {1, 4, 100, 5}));
+        System.out.println(leftOrRight(new long[] {1, 10, 5, 1, 0, 6}));
+    }
+
+    private String leftOrRight(long[] arr) {
+        List<Long> left = new ArrayList<>();
+        List<Long> right = new ArrayList<>();
+        boolean leftSide = true; // true is left, false is right
+        for (int i = 0; i < arr.length; i++) {
+            long value = arr[i];
+            if (value != -1 && i != 0) {
+                if (leftSide) {
+                    left.add(value);
+                } else {
+                    right.add(value);
+                }
+                leftSide = !leftSide;
+            }
+        }
+        long leftTotal = left.stream().mapToLong(i->i).sum();
+        long rightTotal = right.stream().mapToLong(i->i).sum();
+
+
+        if (leftTotal > rightTotal) {
+            return "Left";
+        } else if (leftTotal < rightTotal) {
+            return "Right";
+        } else {
+            return "None";
+        }
+    }
+
+    @Test
+    void countWaysStairs() {
+        System.out.println(countWays(3));
+        System.out.println(countWays(4));
+        System.out.println(countWays(5));
+    }
+
+    public int countWays(int n)
+    {
+        int[] res = new int[n + 1];
+        res[0] = 1;
+        res[1] = 1;
+        res[2] = 2;
+
+        for (int i = 3; i <= n; i++)
+            res[i] = res[i - 1] + res[i - 2] + res[i - 3];
+
+        return res[n];
+    }
+
+    @Test
+    void brackets() {
+        System.out.println(brackets("><<><"));
+    }
+
+    private String brackets(String angles){
+        char [] chars = angles.toCharArray();
+        int greaterThanCount=0;
+        int lessThanCount=0;
+        for (int i=0; i < chars.length; i++) {
+            if (chars[i] == '>') {
+                greaterThanCount++;
+            } else {
+                lessThanCount++;
+            }
+        }
+        System.out.println("the string: " + angles);
+        System.out.println("greater than >: " + greaterThanCount);
+        System.out.println("less than <: " + lessThanCount);
+
+        String prepend = "";
+        for (int i=0; i < greaterThanCount; i++) {
+            prepend+= "<";
+        }
+
+        String postpend = "";
+        for (int i=0; i < lessThanCount; i++) {
+            postpend+= ">";
+        }
+        return prepend + angles + postpend;
+    }
 }
