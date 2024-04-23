@@ -2,6 +2,7 @@ package javastring;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -81,5 +82,41 @@ public class JavaStringTest {
                 System.out.println("chars are same");
             }
         }
+    }
+
+    @Test
+    void duplicateChars() {
+        duplicateChars("nnnniravvvv");
+        duplicateCharsStream("niravvvvnnnnn");
+    }
+
+    private void duplicateChars(String word) {
+        char[] chars = word.toCharArray();
+
+        Set<Character> set = new HashSet<>();
+        Set<Character> dups = new HashSet<>();
+        for (int i=0; i< chars.length; i++) {
+            char c = chars[i];
+            if (!set.contains(chars[i])) {
+                set.add(c);
+            } else {
+                dups.add(c);
+            }
+        }
+
+        System.out.println("all dups are :" + dups);
+    }
+
+    private void duplicateCharsStream(String word) {
+        Set<Character> chars = new HashSet<>();
+        List<Character> result = word.chars().mapToObj(c -> (char) c).map(i -> {
+            if (chars.contains(i)) {
+                return i;
+            } else {
+                chars.add(i);
+                return ' ';
+            }
+        }).filter(i -> !i.equals(' ')).distinct().toList();
+        System.out.println(result);
     }
 }
