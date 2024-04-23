@@ -1,6 +1,7 @@
 package play;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.assertj.core.internal.Arrays;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -155,5 +156,25 @@ public class NiravPlayTest {
             postpend+= ">";
         }
         return prepend + angles + postpend;
+    }
+
+    @Test
+    void coforge() {
+/*        Leader - if it is greater than sum of  all the elements to its right side.
+
+        {16, 17, 4, 3, 5, 2} --> leaders are 17, 5
+ */
+        List<Integer> numbers = List.of(54, 17, 4, 8, 5, 2);
+        for (int i = 0; i < numbers.size(); i++) {
+            int number = numbers.get(i);
+            int otherNumbersSum = 0;
+            for (int j = i+1; j < numbers.size(); j++) {
+                otherNumbersSum += numbers.get(j);
+            }
+            if (number > otherNumbersSum && i != numbers.size() -1) {
+                System.out.println(number + ": IS A LEADER");
+            }
+        }
+
     }
 }
