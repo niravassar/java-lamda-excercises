@@ -23,6 +23,7 @@ public class App {
         findCountOfEachName();
         findHowManyTypeOfProjects();
         findUniqueSetOfNames();
+        findHighestSalaryBasedOnDept();
     }
 
     private static void listAllDistinctProjectInNonAscendingOrder() {
@@ -93,6 +94,22 @@ public class App {
         List<String> namesList = names.stream().distinct().toList();
         System.out.println(namesList);
     }
+
+    private static void findHighestSalaryBasedOnDept() {
+        System.out.println("=== findHighestSalaryBasedOnDept - EASY ======= ");
+        Employee itEmployee = App.employeeList.stream().filter(e -> e.getDepartment().equals("IT")).max(Comparator.comparing(Employee::getSalary)).orElseThrow();
+        Employee hrEmployee = App.employeeList.stream().filter(e -> e.getDepartment().equals("HR")).max(Comparator.comparing(Employee::getSalary)).orElseThrow();
+        convertToString(itEmployee);
+        convertToString(hrEmployee);
+
+        System.out.println("=== findHighestSalaryBasedOnDept - groupBy ======= ");
+        Map<String, Employee> departmentSalaryHighest = new HashMap<>();
+        App.employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment)).forEach( (k,v) -> {
+            departmentSalaryHighest.put(k, v.stream().max(Comparator.comparing(Employee::getSalary)).orElseThrow());
+        });
+        System.out.println(departmentSalaryHighest);
+    }
+
     private static void convertToString(Project project) {
         System.out.printf("%-12s PM: %20s Team:%s%n", project.getName(), project.getProjectManager(), project.getTeam());
     }

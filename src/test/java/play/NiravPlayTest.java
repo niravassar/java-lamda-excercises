@@ -177,4 +177,25 @@ public class NiravPlayTest {
         }
 
     }
+
+    @Test
+    void accenture() {
+        /* Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+        Example 1:
+
+        Input: s = "Hello World"
+        Output: 5
+        Explanation: The last word is "World" with length 5.*/
+        String sentence = "Hello World";
+
+        // first split into list of strings.
+        // length of array
+        // go to last index .get(length-1);
+        // take the length of string
+
+        String[] words = sentence.split(" ");
+        String lastWord = words[words.length-1];
+        System.out.println(lastWord.length());
+    }
 }

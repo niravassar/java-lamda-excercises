@@ -11,18 +11,20 @@ public class Employee {
     private int totalLaptopsAssigned;
     // OneToMany
     private List<Project> projects;
+    private String department;
 
     Employee(){
     }
 
     public Employee(String id, String firstName, String lastName, int salary, int totalLaptopsAssigned,
-                    List<Project> projects) {
+                    List<Project> projects, String department) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.totalLaptopsAssigned = totalLaptopsAssigned;
         this.projects = projects;
+        this.department = department;
     }
 
     @Override
@@ -33,37 +35,27 @@ public class Employee {
     public String getId() {
         return id;
     }
-    public void setId(String id) {
-        this.id = id;
-    }
+
     public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+
     public String getLastName() {
         return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
     public int getSalary() {
         return salary;
     }
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
+
     public List<Project> getProjects() {
         return projects;
     }
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+
     public int getTotalLaptopsAssigned() {
         return totalLaptopsAssigned;
     }
-    public void setTotalLaptopsAssigned(int totalLaptopsAssigned) {
-        this.totalLaptopsAssigned = totalLaptopsAssigned;
+
+    public String getDepartment() {
+        return department;
     }
 }
